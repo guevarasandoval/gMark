@@ -1,0 +1,19 @@
+/* IMAGES */
+
+.logo-image {
+    background-image: url(http://dev.guevara-cia.com/images/logotype.png);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 60px;
+    display: block;
+    margin: 0px auto;
+}
+
+
+/* RETINA DISPLAY STYLES */
+@media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
+    .logo-image {
+        background-image: url(http://dev.guevara-cia.com/images/logotype.png;
+        background-size: 100%;
+    }
+}

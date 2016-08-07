@@ -1,0 +1,23 @@
+[
+    {
+        "day": "Monday",
+        "highTemperature": 28,
+        "lowTemperature": 14,
+        "image": "shower"
+    }, {
+        "day": "Tuesday",
+        "highTemperature": 35,
+        "lowTemperature": 18,
+        "image": "sunny"
+    }, {
+        "day": "Wednesday",
+        "highTemperature": 30,
+        "lowTemperature": 16,
+        "image": "partly-sunny"
+    }, {
+        "day": "Thursday",
+        "highTemperature": 28,
+        "lowTemperature": 13,
+        "image": "sunny"
+    }
+]

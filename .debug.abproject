@@ -1,0 +1,8 @@
+{
+  "CordovaPluginVariables": {
+    "com.streethawk.plugin": {
+      "APP_KEY": "AppGuevaraCia",
+      "URL_SCHEME": "AppGuevaraCia"
+    }
+  }
+}

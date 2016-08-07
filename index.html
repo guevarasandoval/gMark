@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
+    <link href="styles/main.css" rel="stylesheet" />
+    <link href="styles/logoimages.css" rel="stylesheet" />
+
+    <script src="cordova.js"></script>
+    <script src="kendo/js/jquery.min.js"></script>
+    <script src="kendo/js/kendo.mobile.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/inicio.js"></script>
+    <script src="scripts/servicios.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/location.js"></script>
+    <script src="scripts/weather.js"></script>
+    <script src="scripts/catalogo.js"></script>
+    <script src="scripts/listadoProductos.js"></script>
+    <script src="scripts/contacto.js"></script>  
+    <script src="scripts/gapp.js"></script> 
+    
+    
+    <!--Push -->
+    <script src="bower_components/everlive/min/everlive.all.min.js"></script>
+    <script src="scripts/push/config.js"></script>
+    <script src="scripts/push/common.js"></script>
+    
+    
+    
+	<!--<script type="text/javascript" src="plugins/com.streethawk.plugin/www/Streethawk.js"></script>-->
+</head>
+<body>
+    <!--Home View-->
+    <div id="tabstrip-home"
+        data-role="view"
+        data-title="Inicio"
+        data-model="app.inicioService.viewModel"
+        data-show="app.inicioService.viewModel.onShow">
+        <header data-role="header">
+            <div data-role="navbar">
+                
+                <span data-role="view-title"></span>
+                
+            </div>
+        </header>
+        </br>
+        <div class="welcome-image"></div>
+        <!--<h3 data-bind="text: storeName"></h3> -->
+        <p data-bind="text: descripcionEmpresa"></p>
+        
+    </div>
+
+    <!--Servicios View-->
+    <div id="tabstrip-servicios"
+        data-role="view"
+        data-title="Servicios"
+        data-model="app.servicioService.viewModel"
+        data-show="app.servicioService.viewModel.onShow">
+        
+        <header data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+                <!--<a id="skin-change" data-role="button" data-align="right" data-click="app.changeSkin">Flat</a>-->
+            </div>
+        </header>
+
+        <h3>Servicios</h3>
+        
+        <h4 data-bind="text: tituloServicio1"></h4>
+        <p data-bind="text: descripcionServicio1"></p>
+        <h4 data-bind="text: tituloServicio2"></h4>
+        <p data-bind="text: descripcionServicio2"></p>
+        <h4 data-bind="text: tituloServicio3"></h4>
+        <p data-bind="text: descripcionServicio3"></p>
+        <h4 data-bind="text: tituloServicio4"></h4>
+        <p data-bind="text: descripcionServicio4"></p>
+        
+       
+    </div>
+    
+    
+    <!--Login View-->
+    <div id="tabstrip-login"
+        data-role="view"
+        data-title="Login"
+        data-model="app.loginService.viewModel">
+        </br>
+        <div class="logo-image"></div>
+        <div>
+            <h3 data-bind="visible: isLoggedIn">Welcome, <span data-bind="text: username"></span>!</h3>
+            <input id="logout" type="submit" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" value="Logout" class="login-button" />
+        </div>
+        <form data-bind="events: { keyup: checkEnter }">
+            <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
+            <ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
+                <li>
+                    <label>
+                        <div>Username</div>
+                        <input type="text" data-bind="value: username" />
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <div>Password</div>
+                        <input type="password" data-bind="value: password" />
+                    </label>
+                </li>
+            </ul>
+            <input id="login" type="submit" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" value="Login" class="login-button" />
+        </form>
+    </div>
+
+    <!--Contacto View-->
+    <div id="tabstrip-contacto"
+        data-role="view"
+        data-title="Contacto"
+        data-model="app.contactoService.viewModel"
+        data-show="app.contactoService.viewModel.onShow">
+
+            
+                <form>
+                    <ul class="form-content" data-role="listview" data-style="inset">
+                        <li class="form-content-item">
+
+
+                            <label class="km-label-above">
+
+                                <span>Nombres</span>
+
+                                <input data-bind="value: nombreContacto" placeholder="Type here ..." type="text">
+                            </label>
+
+                        </li>
+                        <li class="form-content-item">
+
+
+                            <label class="km-label-above">
+
+                                <span>Email</span>
+
+                                <input data-bind="value: emailContacto" placeholder="example@example.com" type="email">
+                            </label>
+
+                        </li>
+                        <li class="form-content-item">
+                            <label class="km-label-above">
+
+                                <span>Comentario</span>
+
+                                <textarea rows="7" data-bind="value: comentario"></textarea>
+                            </label>
+                        </li>
+                    </ul>
+
+                    <div class="button-group">
+                        <a class="primary" data-role="button" data-bind="events: { click: onSubmit }">Enviar</a>
+                    </div>
+                </form>
+                <!-- START_CUSTOM_CODE_contactViewModel -->
+                <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+
+                <p data-bind="text: direccion"></p>
+                
+                <div class="button-group button-group-vertical">
+                    <a data-role="button" data-rel="external" data-bind="events: { click: goToLinkWeb }">Visita nuestro website</a>
+                    <a data-role="button" data-rel="external" data-bind="events: { click: goToLinkPhone }">Llámanos</a>
+                    <a data-role="button" data-rel="external" data-bind="events: { click: goToLinkFacebook }">Síguenos en Facebook</a>
+                    <a data-role="button" data-rel="external" data-bind="events: { click: goToLinkTwitter }">Síguenos en Twitter</a>
+                </div>
+                <!-- END_CUSTOM_CODE_contactViewModel -->
+            
+
+        
+    </div>
+    
+	<!--gApp View-->
+    <div id="tabstrip-gapp"
+        data-role="view"
+        data-title="gApp"
+        data-model="app.gappService.viewModel">
+
+            <div id="gappViewModel" class="form-view">
+                
+                <p>
+                    Dirección: Tomas Catari 841 - Los Olivos</br>
+                    Lima-Perú
+                </p> 
+                <div class="button-group button-group-vertical">
+                    <a data-role="button" data-rel="external" href="http://www.guevara-cia.com">Visita nuestro website</a>
+                    <a data-role="button" data-rel="external" href="tel:015853638">Llámanos al 585-3638</a>
+                    <a data-role="button" data-rel="external" href="https://www.facebook.com/Telerik">Síguenos en Facebook</a>
+                    <a data-role="button" data-rel="external" href="https://twitter.com/telerik">Síguenos en Twitter</a>
+                </div>
+                <!-- END_CUSTOM_CODE_contactViewModel -->
+            </div>
+
+        
+    </div>
+	
+
+    
+    <!--Location View-->
+    <div id="tabstrip-location"
+        data-role="view"
+        data-title="Location"
+        data-init="app.locationService.initLocation"
+        data-show="app.locationService.show"
+        data-hide="app.locationService.hide"
+        data-model="app.locationService.viewModel"
+        data-stretch="true">
+
+        <div id="map-canvas" class="map" data-bind="visible: isGoogleMapsInitialized"></div>
+
+        <div id="no-map" data-bind="invisible: isGoogleMapsInitialized">
+            <h3>Location requires internet connection to display the map.</h3>
+        </div>
+        <div id="map-search-wrap" class="map-tools" data-bind="visible: isGoogleMapsInitialized, invisible: hideSearch">
+            <div>
+                <button id="map-navigate-home" class="map-tools-button home" data-bind="click: onNavigateHome"></button>
+                <input id="map-address" type="search" class="map-tools-input" data-bind="value: address" placeholder="Address" />
+                <button id="map-search" class="map-tools-button search" data-bind="click: onSearchAddress"></button>
+            </div>
+        </div>
+    </div>
+
+    <!--Weather View-->
+    <div id="tabstrip-weather"
+        data-role="view"
+        data-title="Weather"
+        data-model="app.weatherService.viewModel">
+
+        <ul data-role="listview" 
+            data-style="inset"
+            data-bind="source: weatherDataSource"
+            data-template="weather-forecast-template">
+        </ul>
+    </div>
+
+    <!--Weather forecast template-->
+    <script id="weather-forecast-template" type="text/x-kendo-tmpl">
+        <div class="w-item-template">
+           <!-- <span class="w-icon ${image}"></span>-->
+            <h4 class="w-date">${day}</h4>
+            <!--
+            <div class="w-temp">
+                <span>${highTemperature}<sup>&deg;</sup></span>
+                <span>${lowTemperature}<sup>&deg;</sup></span>
+            </div>
+            -->
+        </div>
+    </script>
+	
+    
+    
+     <!--Catalogo View-->
+    <div id="tabstrip-catalogo"
+        data-role="view"
+        data-title="Catálogo"
+        data-model="app.catalogoService.viewModel">
+
+        <ul data-role="listview"
+            data-style="inset"
+            data-bind="source: catalogoDataSource, events: {click: itemClick}"
+            data-template="catalogo-template">
+        </ul>
+        
+        
+        
+    </div>
+	
+     <!--Catalogo template-->
+    <script id="catalogo-template" type="text/x-kendo-tmpl">
+        <div class="w-item-template">
+            <h4 class="w-date">${name}</h4>
+        </div>
+    </script>
+    
+    
+	 <!--Catalogo Producto View-->
+    <div id="tabstrip-listadoProductos"
+        data-role="view"
+        data-title="Listado Producto"
+        data-model="app.listadoProductoService.viewModel"
+        data-init="app.listadoProductoService.viewModel.showListaProductos"
+        data-show="app.listadoProductoService.viewModel.refreshListaProductos">
+		<!-- las listas de detalle no llevan el data-role="listview"-->
+        <ul id ="listaProductosListView"
+            data-role="listview"
+            data-auto-bind="false"
+            data-style="inset"
+            data-bind="source: listadoProductoDataSource"
+            data-template="producto-template">
+        </ul>
+    </div>
+	
+     <!--CatalogoProducto template-->
+    <script id="producto-template" type="text/x-kendo-tmpl">
+        <div class="w-item-template">
+            <h4>${sku} - ${name} <span>${PEN}</span> </h4>
+            
+        </div>
+    </script>
+
+
+    
+    <!--Layout PLAN BR-->
+    <div data-role="layout" data-id="tabstrip-layout-br">
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Inicio</a>
+                <a href="#tabstrip-servicios" data-icon="contacts">Servicios</a>
+                <a href="#tabstrip-contacto" data-icon="search">Contacto</a>
+                <a href="#tabstrip-gapp" data-icon="search">gApp</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!--Layout PLAN PL-->
+    <div data-role="layout" data-id="tabstrip-layout-pl">
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Inicio</a>
+                <a href="#tabstrip-servicios" data-icon="contacts">Servicios</a>
+                <a href="#tabstrip-contacto" data-icon="search">Contacto</a>
+                <a href="#tabstrip-catalogo" data-icon="globe">Catálogo</a>
+                <a href="#tabstrip-login" data-icon="contacts">Login</a>
+                <a href="#tabstrip-gapp" data-icon="search">gApp</a>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!--Layout PLAN OR-->
+    <div data-role="layout" data-id="tabstrip-layout-or">
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Inicio</a>
+                <a href="#tabstrip-servicios" data-icon="contacts">Servicios</a>
+                <a href="#tabstrip-contacto" data-icon="search">Contacto</a>
+                <a href="#tabstrip-catalogo" data-icon="globe">Catálogo</a>
+                <a href="#tabstrip-login" data-icon="contacts">Login</a>
+                <a href="#tabstrip-gapp" data-icon="search">gApp</a>
+            </div>
+        </div>
+    </div>
+    
+    <!--Layout PLAN PT-->
+    <div data-role="layout" data-id="tabstrip-layout-pt">
+        <!--Header-->
+        <div data-role="header">
+            <div data-role="navbar">
+                <span data-role="view-title"></span>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div data-role="footer">
+            <div data-role="tabstrip">
+                <a href="#tabstrip-home" data-icon="home">Inicio</a>
+                <a href="#tabstrip-servicios" data-icon="contacts">Servicios</a>
+                <a href="#tabstrip-contacto" data-icon="search">Contacto</a>
+                <a href="#tabstrip-catalogo" data-icon="globe">Catálogo</a>
+                <a href="#tabstrip-login" data-icon="contacts">Login</a>
+                <a href="#tabstrip-gapp" data-icon="search">gApp</a>
+            </div>
+        </div>
+    </div>
+    
+    
+</body>
+</html>
